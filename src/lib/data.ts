@@ -33,6 +33,13 @@ export const PROFILE = {
   paperNo: "202521020607",
 } as const;
 
+/**
+ * Hero media. `useVideo: false` shows the still image (public/hero/still.webp).
+ * Set it to true once a new intro video is built with scripts/build-hero-assets.py
+ * (public/hero/hero.mp4 + hero.webm); the player, sound button and loop logic are all kept in Hero.tsx.
+ */
+export const HERO = { useVideo: false } as const;
+
 export const NAV = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
@@ -97,12 +104,11 @@ export const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    family: "DevOps",
+    family: "AI Tools",
     skills: [
-      { name: "Docker", symbol: "Dk", logo: "docker", projects: [CR] },
-      { name: "Docker Compose", symbol: "Dc", logo: "docker", projects: [CR, TE] },
-      { name: "Linux", symbol: "Lx", logo: "linux", projects: [CR] },
-      { name: "Production Deployment", symbol: "Pd", concept: "rocket", projects: [CR] },
+      { name: "Antigravity IDE/CLI", symbol: "Ag", logo: "antigravity" },
+      { name: "Claude Code", symbol: "Cc", logo: "claude" },
+      { name: "n8n", symbol: "N8", logo: "n8n" },
     ],
   },
   {
@@ -113,16 +119,6 @@ export const SKILL_GROUPS: SkillGroup[] = [
       { name: "Postman", symbol: "Pm", logo: "postman", projects: [CR] },
       { name: "Render", symbol: "Rn", concept: "cloud", projects: [CR] },
       { name: "Railway", symbol: "Rw", logo: "railway", projects: [CR] },
-    ],
-  },
-  {
-    family: "Concepts",
-    skills: [
-      { name: "Testing", symbol: "Te", concept: "check" },
-      { name: "Debugging", symbol: "De", concept: "bug" },
-      { name: "System Design", symbol: "Sd", concept: "layers" },
-      { name: "Scalability", symbol: "Sc", concept: "scale" },
-      { name: "Performance Optimization", symbol: "Po", concept: "gauge" },
     ],
   },
 ];

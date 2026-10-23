@@ -7,6 +7,7 @@ export const BRAND: Record<string, string> = {
   html5: "#e34f26", css3: "#1572b6", tailwindcss: "#38bdf8", nodejs: "#5fa04e", express: "#0d0d0d",
   postgresql: "#336791", prisma: "#0c344b", docker: "#2496ed", linux: "#fcc624", git: "#f05032",
   github: "#0d0d0d", postman: "#ff6c37", google: "#4285f4", railway: "#0d0d0d",
+  antigravity: "#1a73e8", claude: "#d97757", n8n: "#ea4b71",
 };
 
 const L = { fill: "none", stroke: "currentColor", strokeWidth: 1.2, strokeLinecap: "round", strokeLinejoin: "round" } as const;
