@@ -49,7 +49,7 @@ export const NAV = [
   { id: "contact", label: "Contact" },
 ] as const;
 
-export type ProjectId = "central-railway" | "temple-erp";
+export type ProjectId = "central-railway" | "temple-erp" | "netra" | "khirbha-portfolio" | "black-head-salon";
 
 export type Skill = { name: string; symbol: string; logo?: string; concept?: string; projects?: ProjectId[] };
 export type SkillGroup = { family: string; skills: Skill[] };
@@ -183,6 +183,76 @@ export const PROJECTS: Project[] = [
       { name: "NextAuth" },
     ],
   },
+  {
+    id: "netra",
+    index: "03",
+    title: "NETRA — AI Phishing Detection & Explainability Engine",
+    kicker: "Deep Learning & Cybersecurity",
+    description:
+      "Architected a multi-signal phishing detection system combining a fine-tuned DistilBERT transformer with RFC email authentication checks (SPF/DKIM/DMARC), typosquatting analysis, and an Integrated Gradients explainability API.",
+    features: [
+      "Fine-tuned DistilBERT model (66M parameters) with sliding window attention",
+      "Multi-signal heuristics: domain typosquatting, TLD scoring, and auth rules",
+      "Explainable AI (/explain) using Integrated Gradients factor attribution",
+      "FastAPI backend with Swagger UI and sub-second p95 inference latency",
+      "Comprehensive test suite with 46/46 stress test pass rate",
+    ],
+    tech: [
+      { name: "Python", logo: "python" },
+      { name: "PyTorch", logo: "pytorch" },
+      { name: "FastAPI", logo: "fastapi" },
+      { name: "Docker", logo: "docker" },
+      { name: "Git", logo: "git" },
+    ],
+    github: "https://github.com/ramanan-2735/NETRA-The-AI-Eye-Against-Phishing",
+  },
+  {
+    id: "khirbha-portfolio",
+    index: "04",
+    title: "Advocate Khirbha Gounder — Legal Practice Platform",
+    kicker: "Client Production Web App",
+    description:
+      "Designed and deployed a modern, high-performance portfolio website for a Mumbai-based High Court Advocate, featuring responsive legal consultation request flows, practice area highlights, and glassmorphic UI design.",
+    features: [
+      "Next.js 15 App Router architecture with React Server Components",
+      "Responsive glassmorphism UI with Tailwind CSS and Framer Motion",
+      "Practice area showcase covering Criminal, Civil, and Corporate Law",
+      "Direct consultation scheduling and mobile-optimized contact actions",
+      "Security-hardened headers and production deployment on Vercel",
+    ],
+    tech: [
+      { name: "Next.js", logo: "nextjs" },
+      { name: "React.js", logo: "react" },
+      { name: "TypeScript", logo: "typescript" },
+      { name: "Tailwind CSS", logo: "tailwindcss" },
+      { name: "Vercel", logo: "vercel" },
+    ],
+    github: "https://github.com/ramanan-2735/khirbha-portfolio",
+  },
+  {
+    id: "black-head-salon",
+    index: "05",
+    title: "Black Head Salon — Appointment Booking Platform",
+    kicker: "Commercial Salon Web App",
+    description:
+      "Built a full-featured salon booking platform in Next.js with multi-tier styling options, instant and owner-approval booking modes, real-time slot reservations, and an in-memory owner management dashboard.",
+    features: [
+      "Instant and approval-based automated booking pipelines",
+      "Interactive service catalog with live duration and pricing calculation",
+      "Owner dashboard for appointment approvals and schedule tracking",
+      "Dual tier support (premium / professional themes) via environment configs",
+      "End-to-end verified with Playwright and Vitest test suites",
+    ],
+    tech: [
+      { name: "Next.js", logo: "nextjs" },
+      { name: "React.js", logo: "react" },
+      { name: "TypeScript", logo: "typescript" },
+      { name: "Tailwind CSS", logo: "tailwindcss" },
+      { name: "Playwright", logo: "playwright" },
+    ],
+    github: "https://github.com/ramanan-2735/black-head-salon",
+  },
+
 ];
 
 export const CERTIFICATIONS = [
@@ -190,6 +260,11 @@ export const CERTIFICATIONS = [
     title: "The Complete Full-Stack Web Development Bootcamp",
     issuer: "Udemy",
     href: "https://www.udemy.com/certificate/UC-a9057ea7-d246-476d-a706-c9f5d8e98a11/",
+  },
+  {
+    title: "100 Days of Code™: The Complete Python Pro Bootcamp",
+    issuer: "Udemy",
+    href: "https://www.udemy.com/certificate/UC-8b0802af-23a4-4029-a280-3e8d15640220/",
   },
 ];
 

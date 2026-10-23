@@ -1,0 +1,3 @@
+Antigravity, Claude and n8n logos (antigravity.svg, claude.svg, n8n.svg)
+Source: @lobehub/icons-static-svg (colour variants), https://github.com/lobehub/lobe-icons
+Licence: MIT. Brand marks remain trademarks of their respective owners.

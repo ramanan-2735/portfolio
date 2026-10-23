@@ -8,6 +8,7 @@ export const BRAND: Record<string, string> = {
   postgresql: "#336791", prisma: "#0c344b", docker: "#2496ed", linux: "#fcc624", git: "#f05032",
   github: "#0d0d0d", postman: "#ff6c37", google: "#4285f4", railway: "#0d0d0d",
   antigravity: "#1a73e8", claude: "#d97757", n8n: "#ea4b71",
+  pytorch: "#ee4c2c", fastapi: "#009688", playwright: "#2ead33", vercel: "#0d0d0d",
 };
 
 const L = { fill: "none", stroke: "currentColor", strokeWidth: 1.2, strokeLinecap: "round", strokeLinejoin: "round" } as const;

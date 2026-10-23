@@ -57,4 +57,5 @@ node scripts/qa-behaviour.mjs shots    # audio pause/resume, card flip, pinned s
 
 - Brand logos in `public/logos/` are the “original” SVGs from [devicon](https://devicon.dev) (MIT — `public/logos/LICENSE-devicon.txt`). Logos remain trademarks of their owners.
 - Fonts: Inter Tight, Instrument Serif, JetBrains Mono — SIL Open Font License 1.1 (via Fontsource).
+- Antigravity, Claude and n8n logos in `public/logos/` are the colour SVGs from [@lobehub/icons-static-svg](https://github.com/lobehub/lobe-icons) (MIT). Brand marks remain trademarks of their owners.
 - Concept icons are original line drawings in `src/components/ui/TechLogo.tsx`.

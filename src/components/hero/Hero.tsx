@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { PROFILE } from "@/lib/data";
+import { HERO, PROFILE } from "@/lib/data";
 import { scrollToTarget } from "@/lib/scroll";
 import { prefersReducedMotion } from "@/lib/hooks";
 
@@ -31,6 +31,7 @@ export default function Hero() {
 
   // initial autoplay (sound if allowed)
   useEffect(() => {
+    if (!HERO.useVideo) return;
     if ((vid.current?.readyState ?? 0) >= 2) setReady(true);
     if (prefersReducedMotion()) { setBlocked(true); return; }
     tryPlay();
@@ -38,7 +39,7 @@ export default function Hero() {
 
   // unlock sound on the first gesture
   useEffect(() => {
-    if (!blocked || prefersReducedMotion()) return;
+    if (!HERO.useVideo || !blocked || prefersReducedMotion()) return;
     const unlock = () => {
       const v = vid.current;
       if (!v) return;
@@ -53,7 +54,7 @@ export default function Hero() {
   // pause (and silence) when the hero is mostly out of view
   useEffect(() => {
     const el = root.current;
-    if (!el) return;
+    if (!HERO.useVideo || !el) return;
     const io = new IntersectionObserver(
       ([e]) => {
         const v = vid.current;
@@ -127,6 +128,11 @@ export default function Hero() {
 
       <div className="hero-stage">
         <div className="hero-frame">
+        {!HERO.useVideo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="hero-video" src="/hero/still.webp" alt={`Portrait of ${PROFILE.name}`} width={768} height={960} fetchPriority="high" decoding="async" />
+        ) : (
+        <>
         {/* still shown (and used for LCP) until the first video frame is ready */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className={`hero-video hero-poster ${ready ? "off" : ""}`} src="/hero/poster.webp" alt="" width={768} height={960} fetchPriority="high" decoding="async" />
@@ -144,6 +150,8 @@ export default function Hero() {
           <source src="/hero/hero.webm" type="video/webm" />
           <source src="/hero/hero.mp4" type="video/mp4" />
         </video>
+        </>
+        )}
         </div>
       </div>
 
@@ -163,6 +171,7 @@ export default function Hero() {
         </div>
 
         <div className="hero-side">
+          {HERO.useVideo && (
           <button
             type="button"
             className={`hero-sound ${blocked ? "ping" : ""}`}
@@ -175,6 +184,7 @@ export default function Hero() {
               <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.4v11.2c0 .5.5.8.9.5l8.6-5.6c.4-.3.4-.8 0-1.1L4.9 1.9c-.4-.3-.9 0-.9.5Z" fill="currentColor" /></svg>
             )}
           </button>
+          )}
           <span className="mono hero-scroll" aria-hidden="true">Scroll ↓</span>
         </div>
       </div>

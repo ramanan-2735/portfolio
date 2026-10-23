@@ -2,6 +2,7 @@
 """Turn the intro video into a seamless looping hero clip.
 
 usage: python scripts/build-hero-assets.py <intro.mp4> [--photo portrait.png] [--crop W:H:X:Y] [--loop-seconds 10]
+       python scripts/build-hero-assets.py <image.png> --still   # static hero image only -> public/hero/still.webp
 
 Needs ffmpeg/ffprobe on PATH and numpy.
 Outputs: public/hero/hero.mp4, public/hero/hero.webm, public/portrait-bust.webp, public/og.jpg
@@ -29,11 +30,11 @@ def probe(src):
     return w, h
 
 
-def detect_crop(src, w, h):
+def detect_crop(src, w, h, times=(0.5, 2.5, 5, 7.5)):
     """Find the person's bounding box (non-white pixels) over a few frames, return a 4:5 crop centred on them."""
     boxes = []
-    for t in (0.5, 2.5, 5, 7.5):
-        raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", str(t), "-i", str(src), "-frames:v", "1",
+    for t in times:
+        raw = subprocess.run(["ffmpeg", "-v", "error", *(["-ss", str(t)] if t else []), "-i", str(src), "-frames:v", "1",
                               "-f", "rawvideo", "-pix_fmt", "gray", "-"], capture_output=True, check=True).stdout
         if len(raw) != w * h:
             continue
@@ -62,6 +63,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("src")
     ap.add_argument("--photo")
+    ap.add_argument("--still", action="store_true", help="src is an image: only build public/hero/still.webp")
     ap.add_argument("--crop")
     ap.add_argument("--loop-seconds", type=float, default=10)
     ap.add_argument("--photo-crop", default="1000:1250:57:20", help="W:H:X:Y crop for the portrait photo (4:5)")
@@ -70,6 +72,14 @@ def main():
     (OUT / "hero").mkdir(parents=True, exist_ok=True)
 
     w, h = probe(src)
+    if a.still:
+        cw, ch, cx, cy = map(int, a.crop.split(":")) if a.crop else detect_crop(src, w, h, times=(0,))
+        print(f"still crop {cw}x{ch} at {cx},{cy}")
+        run("ffmpeg", "-v", "error", "-y", "-i", src, "-vf",
+            # stills are often a shade off-white (~247-253), so whiten a little harder than the video path
+            f"crop={cw}:{ch}:{cx}:{cy},scale={OUT_W}:-2:flags=lanczos,colorlevels=rimax=0.96:gimax=0.96:bimax=0.96",
+            "-frames:v", "1", "-quality", "92", OUT / "hero" / "still.webp")
+        return
     cw, ch, cx, cy = map(int, a.crop.split(":")) if a.crop else detect_crop(src, w, h)
     print(f"crop {cw}x{ch} at {cx},{cy}")
     D = a.loop_seconds
